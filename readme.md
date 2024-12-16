@@ -1,27 +1,27 @@
-# Loremizer
+# Browser Text Anonymizer
 
 A simple bookmarklet that instantly anonymizes webpage content by replacing text with "Lorem" while preserving numbers as random values. Perfect for taking screenshots while protecting sensitive information.
 
 ## Features
 
-- 🔄 Instantly replaces all text with "Lorem"
-- 🔢 Preserves numbers but randomizes them
-- 📏 Maintains original text layout and formatting
+- 🔄 Instantly replaces all text with "Lorem" or "Ipsum"
+- 🔢 Preserves number, special characters and emoji placement but randomizes them
+- 📏 Tries to maintains original text layout and formatting
 - 🔒 Works locally in your browser (no data sent anywhere)
 - ⚡ One-click operation
 - 🖥️ Works on any webpage
 
 ## Installation
 
-1. Visit the Loremizer installation page
-2. Drag the "Loremizer" button to your bookmarks bar
+1. Visit the installation page
+2. Drag the "🔒 Anonymize Text" button to your bookmarks bar
 3. If dragging doesn't work, right-click the button and select "Add to Bookmarks"
 
 ## How to Use
 
 1. Navigate to any webpage you want to anonymize
-2. Click the "Loremizer" bookmark in your bookmarks bar
-3. All text will be instantly replaced with "Lorem" while numbers become random
+2. Click the "🔒 Anonymize Text" bookmark in your bookmarks bar
+3. Everything will be randomized with "Lorem" text
 4. Take your screenshot
 5. Refresh the page to restore original content
 
