@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Browser Text Anonymizer - Instantly Anonymize Webpage Content</title>
+
+  <!-- SEO Meta Tags -->
+  <meta name="description"
+    content="Free browser bookmarklet to instantly anonymize webpage content. Replace sensitive text with Lorem or Ipsum and randomize numbers with one click. Perfect for taking privacy-conscious screenshots.">
+  <meta name="keywords"
+    content="text anonymizer, privacy tool, webpage anonymizer, content privacy, screenshot tool, bookmarklet">
+  <meta name="author" content="Gabriel Kanev">
+
+  <!-- Open Graph / Social Media -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Browser Text Anonymizer - Privacy-First Content Masking">
+  <meta property="og:description"
+    content="One-click tool to anonymize webpage content. Protect sensitive information in screenshots while preserving layout.">
+  <meta property="og:url" content="">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Browser Text Anonymizer">
+  <meta name="twitter:description"
+    content="Instantly mask sensitive webpage content with Lorem or Ipsum text. Perfect for secure screenshots.">
+
+  <link rel="stylesheet" href="assets/style.min.css">
+  <script>
+    function createBookmarklet() {
+      const code = `javascript:(function(){function r(n){if(n.nodeType===3){let t=n.nodeValue;if(t.trim()){t=t.replace(/\\d+/g,m=>m.replace(/\\d/g,d=>Math.floor(Math.random()*10)));t=t.replace(/[A-Za-z]+/g,()=>Math.random()<0.5?'Lorem':'Ipsum');n.nodeValue=t;}}else{for(let c of n.childNodes)r(c);}}r(document.body);})()`;
+      document.getElementById('bookmarklet').href = code;
+    }
+  </script>
+</head>
+
+<body class="bg-gray-50 min-h-screen" onload="createBookmarklet()">
+  <div class="max-w-4xl mx-auto px-4 py-12">
+    <header class="text-center mb-12">
+      <h1 class="text-4xl font-bold text-gray-900 mb-4">Browser Text Anonymizer</h1>
+      <p class="text-lg text-gray-600">Instantly anonymize any webpage content with one click</p>
+    </header>
+
+    <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+      <div class="text-center mb-8">
+        <p class="text-gray-600 mb-4">Drag this button to your bookmarks bar:</p>
+        <div class="group relative inline-block">
+          <a id="bookmarklet" href="#"
+            class="inline-block bg-emerald-600 text-white px-6 py-3 rounded-lg font-bold cursor-move hover:bg-emerald-700 transition-colors hover:-translate-y-0.5 hover:shadow-lg duration-200">
+            🔒 Anonymize Text
+          </a>
+        </div>
+      </div>
+
+      <div class="border-t border-gray-200 pt-8">
+        <h2 class="text-2xl font-semibold text-gray-800 mb-4">How to use:</h2>
+        <ol class="space-y-4 text-gray-600">
+          <li class="flex items-start">
+            <span
+              class="flex items-center justify-center w-6 h-6 rounded-full bg-emerald-100 text-emerald-600 font-semibold mr-3">1</span>
+            <span>Drag the button to your bookmarks bar</span>
+          </li>
+          <li class="flex items-start">
+            <span
+              class="flex items-center justify-center w-6 h-6 rounded-full bg-emerald-100 text-emerald-600 font-semibold mr-3">2</span>
+            <span>Visit any webpage you want to anonymize</span>
+          </li>
+          <li class="flex items-start">
+            <span
+              class="flex items-center justify-center w-6 h-6 rounded-full bg-emerald-100 text-emerald-600 font-semibold mr-3">3</span>
+            <span>Click the bookmark to replace text and randomize numbers</span>
+          </li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="bg-white rounded-lg shadow-lg p-8">
+      <h2 class="text-2xl font-semibold text-gray-800 mb-6">Try it on this sample content:</h2>
+      <div class="p-6 bg-gray-50 rounded-lg space-y-6">
+        <div class="space-y-4">
+          <div class="border-b border-gray-200 pb-4">
+            <h3 class="font-medium text-gray-900 mb-2">Order Details 📦</h3>
+            <p class="text-gray-600">Order #12345 ✨</p>
+            <p class="text-gray-600">Customer: John Smith 👤</p>
+            <p class="text-gray-600">Total Items: 42 🛍️</p>
+            <p class="text-gray-600">Price: $299.99 💰</p>
+            <p class="text-gray-600">Rating: 4.8 out of 5 ⭐</p>
+          </div>
+
+          <div class="border-b border-gray-200 pb-4">
+            <h3 class="font-medium text-gray-900 mb-2">Product Description</h3>
+            <p class="text-gray-600">The Premium Pro Model X200 features advanced technology and superior build quality.
+              Perfect for both professionals and enthusiasts.</p>
+            <p class="text-gray-600 mt-2">Available in multiple colors and configurations to suit your needs.</p>
+          </div>
+
+          <div class="border-b border-gray-200 pb-4">
+            <h3 class="font-medium text-gray-900 mb-2">Financial Summary 💼</h3>
+            <p class="text-gray-600">Q1 Revenue: $1,234,567</p>
+            <p class="text-gray-600">International Pricing: €899.99 | £799.99 | ¥89,999</p>
+            <p class="text-gray-600">Crypto Payment: ₿0.0234 (@#special-offer)</p>
+          </div>
+
+          <div>
+            <h3 class="font-medium text-gray-900 mb-2">Customer Feedback</h3>
+            <p class="text-gray-600">"This product exceeded my expectations! The customer service team was very
+              helpful." - Sarah Johnson</p>
+            <p class="text-gray-600 mt-2">Email: support@example.com</p>
+            <p class="text-gray-600">Reference ID: #ABC-123-XYZ</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="mt-12 text-center text-gray-500">
+      <p>✨ Works offline - No data collection - Open source</p>
+    </footer>
+  </div>
+</body>
+
+</html>
