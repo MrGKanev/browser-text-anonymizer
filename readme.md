@@ -61,6 +61,25 @@ The bookmarklet uses vanilla JavaScript to:
 - Preserve but randomize numbers
 - Maintain original HTML structure and styling
 
+## Useful Commands
+
+- Continuously watch for changes in the `style.css` file, updating the output file whenever changes occur.
+
+```bash
+npx tailwindcss -i ./assets/style.css -o ./assets/style.min.css --watch
+```
+
+- Generate a minified version of the CSS
+
+```bash
+npx tailwindcss -o ./assets/style.min.css --minify 
+```
+
+- Build the application
+
+```bash
+npm run package
+```
 
 ## License
 

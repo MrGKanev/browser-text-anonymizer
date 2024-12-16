@@ -1,78 +1,95 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-  <title>Lorem Ipsum Text Replacer</title>
-  <style>
-    body {
-      font-family: system-ui, -apple-system, sans-serif;
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 20px;
-    }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Browser Text Anonymizer - Instantly Anonymize Webpage Content</title>
 
-    .bookmarklet {
-      display: inline-block;
-      padding: 10px 20px;
-      background: #007bff;
-      color: white;
-      text-decoration: none;
-      border-radius: 5px;
-      margin: 20px 0;
-    }
+  <!-- SEO Meta Tags -->
+  <meta name="description"
+    content="Free browser bookmarklet to instantly anonymize webpage content. Replace sensitive text with Lorem Ipsum and randomize numbers with one click. Perfect for taking privacy-conscious screenshots.">
+  <meta name="keywords"
+    content="text anonymizer, privacy tool, webpage anonymizer, content privacy, screenshot tool, bookmarklet">
+  <meta name="author" content="Loremizer">
 
-    .test-content {
-      border: 1px solid #ddd;
-      padding: 20px;
-      margin: 20px 0;
-    }
-  </style>
+  <!-- Open Graph / Social Media -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Browser Text Anonymizer - Privacy-First Content Masking">
+  <meta property="og:description"
+    content="One-click tool to anonymize webpage content. Protect sensitive information in screenshots while preserving layout.">
+  <meta property="og:url" content="https://your-domain.com">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Browser Text Anonymizer">
+  <meta name="twitter:description"
+    content="Instantly mask sensitive webpage content with Lorem Ipsum text. Perfect for secure screenshots.">
+
+  <link rel="stylesheet" href="assets/style.min.css">
   <script>
-    // This function creates the bookmarklet code
     function createBookmarklet() {
-      const code = `
-                javascript:(function() {
-                    function r(n) {
-                        if (n.nodeType === 3) {
-                            let t = n.nodeValue;
-                            if (t.trim()) {
-                                n.nodeValue = t.replace(/\\d+/g, m => m.replace(/\\d/g, d => Math.floor(Math.random()*10)))
-                                             .replace(/[^\\d\\s\\n.,:;!?()\\[\\]{}'"\\/-]+/g, 'Lorem ipsum');
-                            }
-                        } else {
-                            for (let c of n.childNodes) r(c);
-                        }
-                    }
-                    r(document.body);
-                })()
-            `.replace(/\s+/g, ' ').trim();
-
+      const code = `javascript:(function(){function r(n){if(n.nodeType===3){let t=n.nodeValue;if(t.trim()){n.nodeValue=t.replace(/\\d+/g,m=>m.replace(/\\d/g,d=>Math.floor(Math.random()*10))).replace(/[^\\d\\s\\n.,:;!?()\\[\\]{}'"\\/-]+/g,'Lorem ipsum');}}else{for(let c of n.childNodes)r(c);}}r(document.body);})()`;
       document.getElementById('bookmarklet').href = code;
     }
   </script>
 </head>
 
-<body onload="createBookmarklet()">
-  <h1>Text Replacer</h1>
+<body class="bg-gray-50 min-h-screen" onload="createBookmarklet()">
+  <div class="max-w-4xl mx-auto px-4 py-12">
+    <header class="text-center mb-12">
+      <h1 class="text-4xl font-bold text-gray-900 mb-4">Browser Text Anonymizer</h1>
+      <p class="text-lg text-gray-600">Instantly anonymize any webpage content with one click</p>
+    </header>
 
-  <p>Drag this link to your bookmarks bar:</p>
-  <a class="bookmarklet" id="bookmarklet" href="#">
-    Loremify
-  </a>
+    <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+      <div class="text-center mb-8">
+        <p class="text-gray-600 mb-4">Drag this button to your bookmarks bar:</p>
+        <a id="bookmarklet" href="#"
+          class="inline-block px-6 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors duration-200 shadow-md">
+          🔒 Anonymize Text
+        </a>
+      </div>
 
-  <h2>How to use:</h2>
-  <ol>
-    <li>Drag the blue "Loremify" button to your bookmarks bar</li>
-    <li>Visit any webpage you want to anonymize</li>
-    <li>Click the bookmark to replace text and randomize numbers</li>
-  </ol>
+      <div class="border-t border-gray-200 pt-8">
+        <h2 class="text-2xl font-semibold text-gray-800 mb-4">How to use:</h2>
+        <ol class="space-y-4 text-gray-600">
+          <li class="flex items-start">
+            <span
+              class="flex items-center justify-center w-6 h-6 rounded-full bg-blue-100 text-blue-600 font-semibold mr-3">1</span>
+            <span>Drag the blue "Anonymize Text" button to your bookmarks bar</span>
+          </li>
+          <li class="flex items-start">
+            <span
+              class="flex items-center justify-center w-6 h-6 rounded-full bg-blue-100 text-blue-600 font-semibold mr-3">2</span>
+            <span>Visit any webpage you want to anonymize</span>
+          </li>
+          <li class="flex items-start">
+            <span
+              class="flex items-center justify-center w-6 h-6 rounded-full bg-blue-100 text-blue-600 font-semibold mr-3">3</span>
+            <span>Click the bookmark to replace text and randomize numbers</span>
+          </li>
+        </ol>
+      </div>
+    </div>
 
-  <h2>Test it below:</h2>
-  <div class="test-content">
-    <h3>Sample Content</h3>
-    <p>The price is $299.99</p>
-    <p>Order #12345 with 42 items</p>
-    <p>Rating: 4.8 out of 5</p>
+    <div class="bg-white rounded-lg shadow-lg p-8">
+      <h2 class="text-2xl font-semibold text-gray-800 mb-6">Try it on this sample content:</h2>
+      <div class="p-6 bg-gray-50 rounded-lg space-y-4">
+        <div class="space-y-2">
+          <h3 class="font-medium text-gray-900">Order Details</h3>
+          <p class="text-gray-600">Order #12345</p>
+          <p class="text-gray-600">Customer: John Smith</p>
+          <p class="text-gray-600">Total Items: 42</p>
+          <p class="text-gray-600">Price: $299.99</p>
+          <p class="text-gray-600">Rating: 4.8 out of 5</p>
+        </div>
+      </div>
+    </div>
+
+    <footer class="mt-12 text-center text-gray-500">
+      <p>✨ Works offline - No data collection - Open source</p>
+    </footer>
   </div>
 </body>
 
