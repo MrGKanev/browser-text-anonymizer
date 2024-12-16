@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Lorem Ipsum Text Replacer</title>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .bookmarklet {
+      display: inline-block;
+      padding: 10px 20px;
+      background: #007bff;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      margin: 20px 0;
+    }
+
+    .test-content {
+      border: 1px solid #ddd;
+      padding: 20px;
+      margin: 20px 0;
+    }
+  </style>
+  <script>
+    // This function creates the bookmarklet code
+    function createBookmarklet() {
+      const code = `
+                javascript:(function() {
+                    function r(n) {
+                        if (n.nodeType === 3) {
+                            let t = n.nodeValue;
+                            if (t.trim()) {
+                                n.nodeValue = t.replace(/\\d+/g, m => m.replace(/\\d/g, d => Math.floor(Math.random()*10)))
+                                             .replace(/[^\\d\\s\\n.,:;!?()\\[\\]{}'"\\/-]+/g, 'Lorem ipsum');
+                            }
+                        } else {
+                            for (let c of n.childNodes) r(c);
+                        }
+                    }
+                    r(document.body);
+                })()
+            `.replace(/\s+/g, ' ').trim();
+
+      document.getElementById('bookmarklet').href = code;
+    }
+  </script>
+</head>
+
+<body onload="createBookmarklet()">
+  <h1>Text Replacer</h1>
+
+  <p>Drag this link to your bookmarks bar:</p>
+  <a class="bookmarklet" id="bookmarklet" href="#">
+    Loremify
+  </a>
+
+  <h2>How to use:</h2>
+  <ol>
+    <li>Drag the blue "Loremify" button to your bookmarks bar</li>
+    <li>Visit any webpage you want to anonymize</li>
+    <li>Click the bookmark to replace text and randomize numbers</li>
+  </ol>
+
+  <h2>Test it below:</h2>
+  <div class="test-content">
+    <h3>Sample Content</h3>
+    <p>The price is $299.99</p>
+    <p>Order #12345 with 42 items</p>
+    <p>Rating: 4.8 out of 5</p>
+  </div>
+</body>
+
+</html>
