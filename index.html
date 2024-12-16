@@ -8,7 +8,7 @@
 
   <!-- SEO Meta Tags -->
   <meta name="description"
-    content="Free browser bookmarklet to instantly anonymize webpage content. Replace sensitive text with Lorem Ipsum and randomize numbers with one click. Perfect for taking privacy-conscious screenshots.">
+    content="Free browser bookmarklet to instantly anonymize webpage content. Replace sensitive text with Lorem or Ipsum and randomize numbers with one click. Perfect for taking privacy-conscious screenshots.">
   <meta name="keywords"
     content="text anonymizer, privacy tool, webpage anonymizer, content privacy, screenshot tool, bookmarklet">
   <meta name="author" content="Loremizer">
@@ -24,12 +24,15 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Browser Text Anonymizer">
   <meta name="twitter:description"
-    content="Instantly mask sensitive webpage content with Lorem Ipsum text. Perfect for secure screenshots.">
+    content="Instantly mask sensitive webpage content with Lorem or Ipsum text. Perfect for secure screenshots.">
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://your-domain.com">
 
   <link rel="stylesheet" href="assets/style.min.css">
   <script>
     function createBookmarklet() {
-      const code = `javascript:(function(){function r(n){if(n.nodeType===3){let t=n.nodeValue;if(t.trim()){n.nodeValue=t.replace(/\\d+/g,m=>m.replace(/\\d/g,d=>Math.floor(Math.random()*10))).replace(/[^\\d\\s\\n.,:;!?()\\[\\]{}'"\\/-]+/g,'Lorem ipsum');}}else{for(let c of n.childNodes)r(c);}}r(document.body);})()`;
+      const code = `javascript:(function(){function r(n){if(n.nodeType===3){let t=n.nodeValue;if(t.trim()){t=t.replace(/\\d+/g,m=>m.replace(/\\d/g,d=>Math.floor(Math.random()*10)));t=t.replace(/[A-Za-z]+/g,()=>Math.random()<0.5?'Lorem':'Ipsum');n.nodeValue=t;}}else{for(let c of n.childNodes)r(c);}}r(document.body);})()`;
       document.getElementById('bookmarklet').href = code;
     }
   </script>
@@ -76,13 +79,37 @@
     <div class="bg-white rounded-lg shadow-lg p-8">
       <h2 class="text-2xl font-semibold text-gray-800 mb-6">Try it on this sample content:</h2>
       <div class="p-6 bg-gray-50 rounded-lg space-y-4">
-        <div class="space-y-2">
-          <h3 class="font-medium text-gray-900">Order Details</h3>
-          <p class="text-gray-600">Order #12345</p>
-          <p class="text-gray-600">Customer: John Smith</p>
-          <p class="text-gray-600">Total Items: 42</p>
-          <p class="text-gray-600">Price: $299.99</p>
-          <p class="text-gray-600">Rating: 4.8 out of 5</p>
+        <div class="space-y-4">
+          <div class="border-b pb-4">
+            <h3 class="font-medium text-gray-900 mb-2">Order Details 📦</h3>
+            <p class="text-gray-600">Order #12345 ✨</p>
+            <p class="text-gray-600">Customer: John Smith 👤</p>
+            <p class="text-gray-600">Total Items: 42 🛍️</p>
+            <p class="text-gray-600">Price: $299.99 💰</p>
+            <p class="text-gray-600">Rating: 4.8 out of 5 ⭐</p>
+          </div>
+
+          <div class="border-b pb-4">
+            <h3 class="font-medium text-gray-900 mb-2">Product Description</h3>
+            <p class="text-gray-600">The Premium Pro Model X200 features advanced technology and superior build quality.
+              Perfect for both professionals and enthusiasts.</p>
+            <p class="text-gray-600">Available in multiple colors and configurations to suit your needs.</p>
+          </div>
+
+          <div class="border-b pb-4">
+            <h3 class="font-medium text-gray-900 mb-2">Financial Summary 💼</h3>
+            <p class="text-gray-600">Q1 Revenue: $1,234,567</p>
+            <p class="text-gray-600">International Pricing: €899.99 | £799.99 | ¥89,999</p>
+            <p class="text-gray-600">Crypto Payment: ₿0.0234 (@#special-offer)</p>
+          </div>
+
+          <div>
+            <h3 class="font-medium text-gray-900 mb-2">Customer Feedback</h3>
+            <p class="text-gray-600">"This product exceeded my expectations! The customer service team was very
+              helpful." - Sarah Johnson</p>
+            <p class="text-gray-600">Email: support@example.com</p>
+            <p class="text-gray-600">Reference ID: #ABC-123-XYZ</p>
+          </div>
         </div>
       </div>
     </div>
