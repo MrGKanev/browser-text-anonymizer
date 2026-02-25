@@ -6,7 +6,7 @@ A simple bookmarklet that instantly anonymizes webpage content by replacing text
 
 - 🔄 Instantly replaces all text with "Lorem" or "Ipsum"
 - 🔢 Preserves number, special characters and emoji placement but randomizes them
-- 📏 Tries to maintains original text layout and formatting
+- 📏 Tries to maintain original text layout and formatting
 - 🔒 Works locally in your browser (no data sent anywhere)
 - ⚡ One-click operation
 - 🖥️ Works on any webpage

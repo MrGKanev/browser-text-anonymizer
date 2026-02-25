@@ -22,7 +22,7 @@
   <meta property="og:url" content="https://mrgkanev.github.io/browser-text-anonymizer/">
 
   <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Browser Text Anonymizer">
   <meta name="twitter:description"
     content="Instantly mask sensitive webpage content with Lorem or Ipsum text. Perfect for secure screenshots.">
@@ -42,19 +42,21 @@
 
     <main>
       <section aria-labelledby="install-heading" class="bg-white dark:bg-neutral-800 rounded-lg shadow-lg p-8 mb-8">
+        <h2 id="install-heading" class="text-2xl font-semibold text-neutral-800 dark:text-neutral-100 mb-6">How to use</h2>
         <div class="text-center mb-8">
           <p id="bookmarklet-desc" class="text-neutral-600 dark:text-neutral-400 mb-4">Drag this button to your bookmarks bar:</p>
           <div class="group relative inline-block">
-            <a id="bookmarklet" href="#" role="button" aria-describedby="bookmarklet-desc"
+            <a id="bookmarklet" href="#" draggable="true" aria-describedby="bookmarklet-desc"
+              aria-label="Anonymize Text bookmarklet - drag to bookmarks bar"
               class="inline-block bg-emerald-600 text-white px-6 py-3 rounded-lg font-bold cursor-move hover:bg-emerald-700 transition-colors motion-safe:hover:-translate-y-0.5 hover:shadow-lg duration-200">
-              🔒 Anonymize Text
+              <span aria-hidden="true">🔒</span> Anonymize Text
             </a>
           </div>
         </div>
 
         <div class="border-t border-neutral-200 dark:border-neutral-700 pt-8">
-          <h2 id="install-heading" class="text-2xl font-semibold text-neutral-800 dark:text-neutral-100 mb-4">How to use:</h2>
-          <ol class="space-y-4 text-neutral-600 dark:text-neutral-400" role="list">
+          <h3 class="text-xl font-semibold text-neutral-800 dark:text-neutral-100 mb-4">Steps:</h3>
+          <ol class="space-y-4 text-neutral-600 dark:text-neutral-400">
             <li class="flex items-start">
               <span aria-hidden="true"
                 class="flex items-center justify-center w-6 h-6 rounded-full bg-emerald-100 dark:bg-emerald-900 text-emerald-600 dark:text-emerald-400 font-semibold mr-3">1</span>
@@ -130,16 +132,16 @@
     // Bookmarklet: Uses TreeWalker API, skips non-text elements
     // Words grouped by length for natural-looking replacements
     const BOOKMARKLET_CODE = `javascript:(function(){
-      const skip = new Set(['SCRIPT','STYLE','NOSCRIPT','SVG','IFRAME']);
+      const skip = new Set(['SCRIPT','STYLE','NOSCRIPT','SVG','IFRAME','CANVAS','CODE','TEXTAREA','INPUT','SELECT']);
       const words = {
         1: ['a','I','o'],
         2: ['to','of','in','it','is','be','as','at','so','we','he','by','or','on','do','if','me','my','up','an','go','no','us','am'],
         3: ['the','and','for','are','but','not','you','all','can','had','her','was','one','our','out','day','get','has','him','his','how','its','may','new','now','old','see','two','way','who','boy','did','own','say','she','too','use'],
-        4: ['that','with','have','this','will','your','from','they','been','call','come','each','find','here','just','know','like','long','make','many','more','most','over','part','some','take','than','them','then','time','very','want','well','what','when','work','year','also','back','good','much','only','such','into','last','made','same','look','next','even','give','after'],
-        5: ['about','after','again','being','below','could','every','first','found','great','house','large','learn','never','other','place','plant','point','right','small','sound','spell','still','study','their','there','these','thing','think','three','water','where','which','world','would','write','years','under','before','should','through'],
-        6: ['people','should','before','through','change','around','follow','because','another','between','against','during','without','however','nothing','always','family','friend','number','really','system','important'],
-        7: ['another','because','between','country','develop','general','example','however','include','national','through','without','company','problem','program','provide','service','several','student','support','working'],
-        8: ['business','children','computer','continue','different','everyone','possible','question','remember','research','together','sometimes','important','probably','american','community','education','following','government','something','according','available','certainly','therefore','interest']
+        4: ['that','with','have','this','will','your','from','they','been','call','come','each','find','here','just','know','like','long','make','many','more','most','over','part','some','take','than','them','then','time','very','want','well','what','when','work','year','also','back','good','much','only','such','into','last','made','same','look','next','even','give'],
+        5: ['about','after','again','being','below','could','every','first','found','great','house','large','learn','never','other','place','plant','point','right','small','sound','spell','still','study','their','there','these','thing','think','three','water','where','which','world','would','write','years','under'],
+        6: ['people','should','before','change','around','follow','during','always','family','friend','number','really','system'],
+        7: ['another','because','between','through','against','without','however','nothing','country','develop','general','example','include','company','problem','program','provide','service','several','student','support','working'],
+        8: ['business','children','computer','continue','national','everyone','possible','question','remember','research','together','probably','american','interest','different','sometimes','important','community','education','following','something','according','available','certainly','therefore','government']
       };
       const pick = len => {
         const key = Math.min(Math.max(len, 1), 8);
@@ -154,9 +156,16 @@
       const walker = document.createTreeWalker(
         document.body,
         NodeFilter.SHOW_TEXT,
-        { acceptNode: n => n.nodeValue.trim() && !skip.has(n.parentElement?.tagName)
-            ? NodeFilter.FILTER_ACCEPT
-            : NodeFilter.FILTER_REJECT }
+        { acceptNode: n => {
+            if (!n.nodeValue.trim()) return NodeFilter.FILTER_REJECT;
+            let el = n.parentElement;
+            while (el) {
+              if (skip.has(el.tagName)) return NodeFilter.FILTER_REJECT;
+              el = el.parentElement;
+            }
+            return NodeFilter.FILTER_ACCEPT;
+          }
+        }
       );
       let node;
       while (node = walker.nextNode()) {
@@ -167,6 +176,19 @@
     })()`.replace(/\s+/g, ' ').trim();
 
     document.getElementById('bookmarklet').href = BOOKMARKLET_CODE;
+
+    // Prevent clicking - bookmarklet must be dragged to bookmarks bar
+    document.getElementById('bookmarklet').addEventListener('click', function(e) {
+      e.preventDefault();
+      var btn = this;
+      var origText = btn.textContent;
+      btn.textContent = '\u2B06 Drag me to your bookmarks bar!';
+      btn.classList.replace('bg-emerald-600', 'bg-amber-600');
+      setTimeout(function() {
+        btn.textContent = origText;
+        btn.classList.replace('bg-amber-600', 'bg-emerald-600');
+      }, 2000);
+    });
   </script>
 </body>
 
